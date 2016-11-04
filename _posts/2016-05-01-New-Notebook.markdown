@@ -2,7 +2,7 @@
 slideinit: "<section markdown=\"1\" data-background=\"http://tonydeeptech.github.io/blogs/img/slidebackground.png\"><section markdown=\"1\">"
 vertical: "</section><section markdown=\"1\">"
 horizontal: "</section></section><section markdown=\"1\" data-background=\"http://tonydeeptech.github.io/blogs/img/slidebackground.png\"><section markdown=\"1\">"
-layout: notebook
+layout: plysurface
 title: New Notebook
 author: Ahmet Cecen
 tags: jupyter workflows template
