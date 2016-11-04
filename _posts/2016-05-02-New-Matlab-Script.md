@@ -7,8 +7,8 @@ tags: 		matlab workflows template
 subtitle:   Some Short Description of the Script
 category:  project1
 visualworkflow: true
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
 ---
+![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
 {% if page.visualworkflow == true %}
    {% include workflowmatlab.html %}
 {% endif %}   
