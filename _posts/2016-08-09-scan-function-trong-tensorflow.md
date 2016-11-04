@@ -1,5 +1,4 @@
 ---
-header_cover: https://tonydeep.github.io/images/HEADER_Momentum.jpg
 title: Hàm Scan trong Tensorflow
 tags: tensorflow, tutorials, rnn
 date: 2016-08-09 20:00
