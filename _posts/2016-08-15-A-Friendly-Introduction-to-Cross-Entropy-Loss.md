@@ -1,5 +1,5 @@
 ---
-layout: notebook
+layout: post
 title: Cross-Entropy Loss là gì?
 author: Tony Khánh
 tags: entropy loss tensorflow
