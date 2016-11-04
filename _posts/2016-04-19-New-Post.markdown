@@ -5,7 +5,7 @@ author:     Ahmet Cecen
 tags: 		post template
 subtitle:  	Some Short Description of Post
 category:  project1
-visible: true
+visible: false
 ---
 <!-- Start Writing Below in Markdown -->
 
