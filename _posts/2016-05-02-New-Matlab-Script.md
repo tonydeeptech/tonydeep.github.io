@@ -1,4 +1,5 @@
 ---
+visible: false
 layout:     post
 title:      New Matlab Script
 author:     Ahmet Cecen
