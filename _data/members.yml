@@ -1,11 +1,11 @@
 # Members
 
-- name: Tony Khanh
+- name: Tony Khánh
   role: PhD student at JAIST, Japan
   img: 
   github: tonydeeptech
   gplus: 
   bio: Interested in Deep Learning techniques, Natural Language Generation, NLP, ML
   url: http://tonydeeptech.github.io/
-  visible: true
+  visible: false
  
