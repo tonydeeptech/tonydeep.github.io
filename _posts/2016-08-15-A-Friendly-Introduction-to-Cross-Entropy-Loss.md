@@ -1,10 +1,10 @@
 ---
-layout:     notebook
-title:      Cross-Entropy Loss là gì?
-author:     Tony Khánh
+layout: notebook
+title: Cross-Entropy Loss là gì?
+author: Tony Khánh
 tags: 		jupyter workflows template
-subtitle:   Entropy, Cross-Entroy và Losses
-category:  project1
+subtitle: Entropy, Cross-Entroy và Losses
+category: posts
 ---
 
 # Cross-Entropy Loss là gì?
