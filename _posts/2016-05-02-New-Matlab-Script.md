@@ -5,7 +5,7 @@ title:      New Matlab Script
 author:     Ahmet Cecen
 tags: 		matlab workflows template
 subtitle:   Some Short Description of the Script
-category:  project1
+category:  "Machine Learning"
 visualworkflow: true
 ---
 ![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
