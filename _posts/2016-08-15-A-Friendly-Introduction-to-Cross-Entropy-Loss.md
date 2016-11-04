@@ -5,7 +5,7 @@ author: Tony Khánh
 tags: entropy loss tensorflow
 subtitle: Entropy, Cross-Entroy và Losses
 category: posts
-header-img: "img/home-bg.jpg"
+header-img: "img/home-bg0.jpg"
 ---
 
 # Cross-Entropy Loss là gì?
