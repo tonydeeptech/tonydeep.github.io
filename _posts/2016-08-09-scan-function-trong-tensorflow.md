@@ -7,8 +7,8 @@ Date: 2016-08-09 20:00
 Author: Tony Khánh
 Comment: True
 Summary: Một trong những **High Order Functions** của Tensorflow.
-
 ---
+
 Hàm ***scan*** là một một trong những hàm quan trọng trong Theano và giờ đây đã được Tensorflow sử dụng bởi sự tiện lợi và linh hoạt của nó.
 
 ## Overview
