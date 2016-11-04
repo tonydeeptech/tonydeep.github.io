@@ -4,10 +4,10 @@ title: Hàm Scan trong Tensorflow
 slug: tensorflow-scan-function
 tags: tensorflow, tutorials, rnn
 date: 2016-08-09 20:00
-subtitle: Một trong những **High Order Functions** của Tensorflow.
+subtitle: Một trong những *High Order Functions* của Tensorflow.
 layout:     notebook
 author:     Tony Khánh
-category:  project1
+category:  posts
 ---
 
 Hàm ***scan*** là một một trong những hàm quan trọng trong Theano và giờ đây đã được Tensorflow sử dụng bởi sự tiện lợi và linh hoạt của nó.
