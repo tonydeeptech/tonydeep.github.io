@@ -1,9 +1,9 @@
 ---
 layout:     notebook
-title:      Cross-Entropy Loss
+title:      Cross-Entropy Loss là gì?
 author:     Tony Khánh
 tags: 		jupyter workflows template
-subtitle:   Showcasing Jupyter Notebook Translator Layout
+subtitle:   Entropy, Cross-Entroy và Losses
 category:  project1
 ---
 
