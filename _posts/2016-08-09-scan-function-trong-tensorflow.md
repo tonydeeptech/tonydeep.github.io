@@ -1,12 +1,14 @@
-Header_Cover: https://tonydeep.github.io/images/HEADER_Momentum.jpg
-Title: Hàm Scan trong Tensorflow
-Slug: tensorflow-scan-function
-Category: posts
-Tags: tensorflow, tutorials, rnn
-Date: 2016-08-09 20:00
-Author: Tony Khánh
-Comment: True
-Summary: Một trong những **High Order Functions** của Tensorflow.
+---
+header_cover: https://tonydeep.github.io/images/HEADER_Momentum.jpg
+title: Hàm Scan trong Tensorflow
+slug: tensorflow-scan-function
+tags: tensorflow, tutorials, rnn
+date: 2016-08-09 20:00
+subtitle: Một trong những **High Order Functions** của Tensorflow.
+layout:     notebook
+author:     Tony Khánh
+subtitle:   Entropy, Cross-Entroy và Losses
+category:  project1
 ---
 
 Hàm ***scan*** là một một trong những hàm quan trọng trong Theano và giờ đây đã được Tensorflow sử dụng bởi sự tiện lợi và linh hoạt của nó.
