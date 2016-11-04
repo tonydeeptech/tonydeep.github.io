@@ -1,4 +1,5 @@
 ---
+header-img: "img/home-bg.jpg"
 layout:     post
 title:      New Post
 author:     Ahmet Cecen
