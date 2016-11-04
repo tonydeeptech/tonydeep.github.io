@@ -5,7 +5,7 @@ date: 2016-08-19 20:00
 subtitle: Một trong những High Order Functions của Tensorflow.
 layout: notebook
 author: Tony Khánh
-category: posts
+category: tensorflowtut
 header-img: "img/home-bg.jpg"
 ---
 
