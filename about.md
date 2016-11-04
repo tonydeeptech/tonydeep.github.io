@@ -14,6 +14,6 @@ title: About me
 
 - Hobbies: Playing Football, Tennis, PES, Watching Movies, Traveling
 
-- Interesting: Deep Learning, Recurrent Neural Networks, LSTM, Natural Language Processing
+- Interesting: Deep Learning, Recurrent Neural Networks, LSTM, Natural Language Processing, Natural Language Generation
 
 	
