@@ -1,7 +1,7 @@
 ---
 title: Hàm Scan trong Tensorflow
 tags: tensorflow tutorials rnn
-date: 2016-08-09 20:00
+date: 2016-08-19 20:00
 subtitle: Một trong những High Order Functions của Tensorflow.
 layout: notebook
 author: Tony Khánh
