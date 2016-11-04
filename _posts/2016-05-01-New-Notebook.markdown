@@ -5,7 +5,7 @@ author:     Ahmet Cecen
 tags: 		jupyter workflows template
 subtitle:   Showcasing Jupyter Notebook Translator Layout
 category:  project1
-
+visible: false
 notebookfilename: intro
 visualworkflow: true
 ---
