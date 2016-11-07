@@ -1,4 +1,13 @@
-
+---
+title: Cross-Entropy Loss là gì?
+tags: machinelearning tutorials
+date: 2016-08-19 20:00
+subtitle: Cross-entropy, Losses, and KL
+layout: notebook
+author: Tony Khánh
+category: machinelearning
+header-img: "img/home-bg.jpg"
+---
 # Cross-Entropy Loss là gì?
 
 ## Contents
