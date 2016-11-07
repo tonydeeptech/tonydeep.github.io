@@ -1,13 +1,3 @@
----
-layout: notebook
-title: Cross-Entropy Loss là gì?
-author: Tony Khánh
-tags: entropy loss tensorflow
-subtitle: Entropy, Cross-Entroy và Losses
-category: posts
-header-img: "img/home-bg0.jpg"
-date: 2016-08-16
----
 
 # Cross-Entropy Loss là gì?
 
@@ -25,7 +15,7 @@ date: 2016-08-16
 <a id="introduction"></a>
 ## Introduction
 
-![Classification Images](https://tonydeep.github.io/images/classification_images.png)
+![Classification Images](https://tonydeep.github.io/img/ce_post/classification_images.png)
 
 Mục tiêu của bài toán phân lớp dựa trên tính toán xác suất ([*probabilistic classification*](https://en.wikipedia.org/wiki/Probabilistic_classification)) là gán (*map*) dữ liệu đầu vào cho nhãn của lớp có xác suất cao nhất, và chúng ta thường *train* mô hình bằng điều chỉnh tham số của mô hình sao cho xác suất dự đoán được càng sát với *ground-truth probabilities* càng tốt. 
 
@@ -41,7 +31,7 @@ Có nhiều cách để đánh giá sự khác biệt này, ở post này chúng
 <a id="entropy"></a>
 ## Entropy
 
-![Claude Shannon](https://tonydeep.github.io/images/claude_shannon.jpg)
+![Claude Shannon](https://tonydeep.github.io/img/ce_post/claude_shannon.jpg)
 ##### [Claude Shannon](https://en.wikipedia.org/wiki/Claude_Shannon)
 
 ### Code, Codeword, Encode-Decode
@@ -50,33 +40,33 @@ Các bạn hẳn vẫn còn nhớ cô nàng Alice và anh chàng Bob trong nhữ
 
 Một lần Bob đi du lịch xa, Bob liên lạc với Alice qua tin nhắn và mã hoá tin nhắn chỉ gồm các ký tự nhị phân $0$ và $1$. Tin nhắn của Bob như sau:
 
-![Bobs massages](https://tonydeep.github.io/images/2016-08-15-A-Friendly-Introduction-to-Cross-Entropy-Loss/binary_bits.png)
+![Bobs massages](https://tonydeep.github.io/img/ce_post/binary_bits.png)
 
 Để thuận tiện cho việc trao đổi, Bob và Alice cùng thống nhất với nhau về cách thức mã hoá tin nhắn bằng cách thay thế từng từ thành chuỗi nhị phân (*codeword*) độ dài 2 bit tương ứng và ghép lại thành 1 chuỗi tin nhắn duy nhất. Cụ thể:
 
-![code-2bit](https://tonydeep.github.io/images/2016-08-15-A-Friendly-Introduction-to-Cross-Entropy-Loss/code-2bit.png)
+![code-2bit](https://tonydeep.github.io/img/ce_post/code-2bit.png)
 
 và giải mã thông tin như sau:
 
-![encode-2bit](https://tonydeep.github.io/images/2016-08-15-A-Friendly-Introduction-to-Cross-Entropy-Loss/encode-2bit.png)
+![encode-2bit](https://tonydeep.github.io/img/ce_post/encode-2bit.png)
 
 Mọi chuyện sẽ không đáng lo nếu như giá cước là $100$ đồng/*1 bit*, nhưng nay đã tăng lên là $500$ đồng/*1 bit*. Giá cả đắt đỏ chẳng nhẽ lại thôi không liên lạc nữa. Do vậy, Bob và Alice quyết tìm ra cách nào đó để tin nhắn ngắn hơn (để giảm cước phí) nhưng vẫn đảm bảo chuyển tải được đầy đủ thông tin.
 
 Cùng nhau xem xét lại lịch sử các tin nhắn, Alice thấy rằng Bob tần suất các từ trong tin nhắn của Bob không tương đương với nhau. Cụ thể là: Bob thực sự thích "*dog*", anh ấy chủ yếu nói về "*dog*" trong mọi tin nhắn của mình, thỉnh thoảng Bob mới nhắc đến 3 con vật còn lại là "*cat*", "*fish*" và "*bird*". Tần suất cụ thể như bảng thống kê dưới đây:
 
-![DogWordFreq](https://tonydeep.github.io/images/2016-08-15-A-Friendly-Introduction-to-Cross-Entropy-Loss/DogWordFreq.png)
+![DogWordFreq](https://tonydeep.github.io/img/ce_post/DogWordFreq.png)
 
 Phân tích một cách chi tiết hơn về *codeword* mà 2 bạn đã dùng bằng biểu đồ dưới đây, với: *Trục tung* - Thể hiện xác suất xuất hiện $p(x)$ của 1 word; *Trục hoành* - Độ dài $L(x)$ của codeword tương ứng; *Diện tích* - *Expected codeword lenght*: Độ dài kỳ vọng hay độ dài trung bình của một codeword được gửi đi, ở đây = *2 bit*:
 
-![oldcode](https://tonydeep.github.io/images/2016-08-15-A-Friendly-Introduction-to-Cross-Entropy-Loss/OldCode.png)
+![oldcode](https://tonydeep.github.io/img/ce_post/OldCode.png)
 
 Như vậy, mục tiêu của 2 bạn là *cực tiểu* độ dài của tin nhắn gửi đi. Ở đây là hoàn toàn có thể lựa chọn codeword có [độ dài khác nhau](https://en.wikipedia.org/wiki/Variable-length_code). Theo thuật toán tham lam thì word nào xuất hiện nhiều (*word phổ biến*, ví dụ như "*dog*") sẽ ưu tiên chọn độ dài codeword tương ứng ngắn hơn và ngược lại những word nào xuất hiện ít (*word hiếm*, ví dụ như "*bird*") thì codeword sử dụng sẽ dài hơn. Cụ thể ta có được như sau:
 
-![code](https://tonydeep.github.io/images/2016-08-15-A-Friendly-Introduction-to-Cross-Entropy-Loss/code.png)
+![code](https://tonydeep.github.io/img/ce_post/code.png)
 
 Biểu đồ phân tích cho bộ codeword mới như sau:
 
-![newcode](https://tonydeep.github.io/images/2016-08-15-A-Friendly-Introduction-to-Cross-Entropy-Loss/NewCode.png)
+![newcode](https://tonydeep.github.io/img/ce_post/NewCode.png)
 
 Để ý rằng trong biểu đồ trên độ dài của codeword phổ biến ngắn hơn trong khi đó độ dài của codeword hiếm là dài hơn. Phần diện tích được tính toán cũng nhỏ hơn,và tương ứng với độ dài trung bình của codeword là $1.75$. Như vậy bằng cách sử dụng codeword có độ dài khác nhau ta có thể làm cho độ dài trung bình của codeword nhỏ hơn. 
 
@@ -86,13 +76,13 @@ Với ví dụ trên cùng với phân bố xác suất $p(x) = (\frac{1}{2}, \f
 
 Như vậy, các bạn có thể thấy rằng với mỗi bộ phân bố xác suất $p(X)$ cho trước, ta hoàn toàn xác định được giá trị tối ưu của code, hay độ dài trung bình tối ưu của codeword. Và giá trị này được gọi là [ENTROPY](https://en.wikipedia.org/wiki/Entropy_(information_theory).
 
-![EntropOptimalLengthExample](https://tonydeep.github.io/images/2016-08-15-A-Friendly-Introduction-to-Cross-Entropy-Loss/EntropOptimalLengthExample.png)
+![EntropOptimalLengthExample](https://tonydeep.github.io/img/ce_post/EntropOptimalLengthExample.png)
 
 ### Không gian codeword
 
 Chúng ta có 2 codeword độ dài 1 là: *0* và *1*; 4 codeword độ dài 2 là: *00*, *01*, *10*, *11*; và tổng quát là $2^n$ codeword độ dài n.
 
-![codespace](https://tonydeep.github.io/images/2016-08-15-A-Friendly-Introduction-to-Cross-Entropy-Loss/CodeSpace.png)
+![codespace](https://tonydeep.github.io/img/ce_post/CodeSpace.png)
 
 Như trên đã nói, bạn hoàn toàn có thể tuỳ ý lựa chọn codeword có độ dài bất kỳ. Ví dụ như hình trên là 8 codeword độ dài 3, bạn có thể lựa chọn một cách tổ hợp các codeword có độ dài khác nhau như bạn chọn 2 codeword độ dài 2, 4 codeword độ dài 3 chẳng hạn. 
 
@@ -100,7 +90,7 @@ Vậy điều gì quyết định đến việc chọn lựa codeword với đ�
 
 Ở hình dưới, Bob mã hoá tin nhắn bằng cách thay thế từng word bằng codeword tương ứng và ghép lại thành một chuỗi mã hoá nhị phân.
 
-![encode](https://tonydeep.github.io/images/2016-08-15-A-Friendly-Introduction-to-Cross-Entropy-Loss/encode.png)
+![encode](https://tonydeep.github.io/img/ce_post/encode.png)
 
 Có một điều bạn cần lưu ý ở đây là làm thế nào để từ chuỗi mã hoá bạn có thể giải mã ngược lại thành chuỗi các codeword. Nếu như chọn codeword có độ dài như nhau thì việc này khá đơn giản. Tuy nhiên bạn lựa chọn codeword độ dài khác nhau việc giải mã ngược lại được thành chuỗi codeword là việc hết sức quan trọng.
 
@@ -108,7 +98,7 @@ Thực tế, bạn cần chọn bộ codeword sao cho việc giải mã là duy 
 
 Để dễ dàng cho việc lựa chọn *prefix code*, bạn sẽ sử dụng một phương pháp gọi là "*hi sinh*", nghĩa là khi bạn đã chọn một codeword, ví dụ như $01$, thì toàn bộ không gian codeword bắt đầu bằng $01$ sẽ không được sử dụng, ví dụ bạn sẽ không được dùng các codeword như: $010$, $0101$, ... bởi nó sẽ gây ra tình trạng "*nhập nhằng*" cho quá trình giải mã. 
 
-![codespaceused](https://tonydeep.github.io/images/2016-08-15-A-Friendly-Introduction-to-Cross-Entropy-Loss/CodeSpaceUsed.png)
+![codespaceused](https://tonydeep.github.io/img/ce_post/CodeSpaceUsed.png)
 
 Với $\frac{1}{4}$ trong tổng số codeword bắt đầu bằng $01$, như vậy nếu codeword $01$ được chọn, bạn sẽ phải "*hi sinh*" $\frac{1}{4}$ tổng số codeword. Đây là "*chi phí*" bạn phải trả để có được một codeword độ dài 2. 
 
@@ -118,13 +108,13 @@ Với $\frac{1}{4}$ trong tổng số codeword bắt đầu bằng $01$, như v�
 
 *Chi phí* cho codeword có độ dài $0$ là $1$ - tức toàn bộ codeword - nghĩa là nếu bạn chọn codeword có độ dài 0 thì bạn sẽ không được chọn bất kỳ codeword nào khác nữa; *Chi phí* cho codeword độ dài 1, ví dụ như codeword $0$, là $\frac{1}{2}$ vì có $\frac{1}{2}$ số lượng codeword bắt đầu bằng $0$; *Chi phí* cho codeword độ dài 2, ví dụ "$10$", là $\frac{1}{4}$ vì có $\frac{1}{4}$ số lượng codewprd bắt đầu bằng "10". Tổng quát, *Chi phí* cho codeword giảm theo hàm luỹ mũ của độ dài codeword.
 
-![code-costonly](https://tonydeep.github.io/images/2016-08-15-A-Friendly-Introduction-to-Cross-Entropy-Loss/code-costonly.png)
+![code-costonly](https://tonydeep.github.io/img/ce_post/code-costonly.png)
 
 ### Công thức tính Entropy
 
 *Chi phí* cho codeword độ dài L là $cost = \frac{1}{2^L}$, hay ngược lại nếu ta biết $cost$ của 1 codeword thì ta có thể tính được độ dài của codeword như sau: $l = \log_{2}(\frac{1}{cost})$. Nếu bạn "*tiêu*" một chi phí $p(x)$ cho codeword $x$, độ dài của codeword x sẽ là $\log_{2}(\frac{1}{p(x)})$.
 
-![entropy-def-notitle](https://tonydeep.github.io/images/2016-08-15-A-Friendly-Introduction-to-Cross-Entropy-Loss/entropy-def-notitle.png) 
+![entropy-def-notitle](https://tonydeep.github.io/img/ce_post/entropy-def-notitle.png) 
 
 Với một phân bố xác suất cụ thể $p$, ta xác định được độ dài trung bình ngắn nhất của bộ codeword - được gọi là "*entropy*" của $p$, kí hiệu là $H(p)$. Ta có:
 
@@ -142,13 +132,13 @@ Entropy mô tả độ "***không chắc chắn***" của thông tin và là m�
 <a id="minimizing-cross-entropy"></a>
 ## Cross Entropy
 
-![Tools](https://tonydeep.github.io/images/tools.jpg)
+![Tools](https://tonydeep.github.io/img/ce_post/tools.jpg)
 
 Trở lại với câu chuyện của Bob và Alice, lúc trước 2 bạn chỉ nói tới sự quan tâm của Bob về 4 loại động vật: $dog$, $cat$, $fish$ và $bird$, đặc biệt sở thích của Bob về $dog$. Có chút thay đổi trong hoàn cảnh này là với Alice, cô cũng thích cả 4 loại động vật trên như Bob, nhưng cô thích nói về $cat$ hơn cả. Như vậy, 2 người có cùng "$vocabulary size$" nhưng khác nhau về tần suất cho từng loại. Bob có thể nói cả ngày về chủ đề $dog$, trong khi đó Alice lại cũng có thể nói cả ngày với chủ đề $cat$.
 
 Cụ thể như hình dưới đây: 
 
-![DogCatWordFreq](https://tonydeep.github.io/images/2016-08-15-A-Friendly-Introduction-to-Cross-Entropy-Loss/DogCatWordFreq.png) 
+![DogCatWordFreq](https://tonydeep.github.io/img/ce_post/DogCatWordFreq.png) 
 
 Ban đầu, Alice gửi tin cho Bob cùng sử dụng bộ code của Bob. Tuy nhiên tin nhắn của Alice lại có vẻ dài hơn so với mong đợi của 2 bạn. Bộ code của Bob đã được tối ưu dựa trên phân bố xác suất của Bob. Alice đã sử dụng bộ code được tối ưu (***suboptimal***) dựa trên phân bố xác suất của riêng mình. Do đó trong khi độ dài trung bình codeword của Bob là sử dụng bộ code của Bob là $1.75$ bit, thì độ dài trung bình codeword của Alice sử dụng bộ code của Bob lại dài hơn là $2.25$ bit. 
 
@@ -165,7 +155,7 @@ $$H(p, q) = H_{q}(p) = \sum_{x} p(x) \log(\frac{1}{q(x)}) = - \sum_{x} p(x) \log
 
 Ví dụ ta có: 
 
-![CrossEntropyDef](https://tonydeep.github.io/images/2016-08-15-A-Friendly-Introduction-to-Cross-Entropy-Loss/CrossEntropyDef.png)
+![CrossEntropyDef](https://tonydeep.github.io/img/ce_post/CrossEntropyDef.png)
 
 - Cross-entroy luôn luôn lớn hơn Entropy; Việc mã hoá sử dụng *tool sai* $q(x)$ sẽ luôn phải sử dụng nhiều bit hơn.
 - Cross-entropy không có tính chất đối xứng, nghĩa là $H(p, q) \neq H(q, p)$.
@@ -176,22 +166,22 @@ Ta có thể có một vài kịch bản sau:
 - Alice sử dụng Alice code: $H(p) = H_{q}(q) = 1.75$ bit
 - Bod sử dụng Alice code: $H_{q}(p) = 2.375$ bit
 
-![CrossEntropyCompare](https://tonydeep.github.io/images/2016-08-15-A-Friendly-Introduction-to-Cross-Entropy-Loss/CrossEntropyCompare.png)
+![CrossEntropyCompare](https://tonydeep.github.io/img/ce_post/CrossEntropyCompare.png)
 
 ### Tại sao cross-entropy lại quan trọng ???
 Cross-entropy cho biết sự mức độ khác biệt giữa 2 phân bố xác suất. Sự khác biệt giữa phân bố $p$ và $q$ càng lớn, thì cross-entropy của p đối với q sẽ càng lớn hơn entropy của p.
 
-![CrossEntropyPQ](https://tonydeep.github.io/images/2016-08-15-A-Friendly-Introduction-to-Cross-Entropy-Loss/CrossEntropyPQ.png)
+![CrossEntropyPQ](https://tonydeep.github.io/img/ce_post/CrossEntropyPQ.png)
 
 Tương tự, sự khác biệt giữa phân bố $p$ và $q$ càng lớn, thì cross-entropy của q đối với p sẽ càng lớn hơn entropy của q.
 
-![CrossEntropyQP](https://tonydeep.github.io/images/2016-08-15-A-Friendly-Introduction-to-Cross-Entropy-Loss/CrossEntropyQP.png)
+![CrossEntropyQP](https://tonydeep.github.io/img/ce_post/CrossEntropyQP.png)
 
 
 <a id="kl-divergence"></a>
 ## KL Divergence - KL phân kỳ
 
-![Taxes](https://tonydeep.github.io/images/taxes.jpg)
+![Taxes](https://tonydeep.github.io/img/ce_post/taxes.jpg)
 
 Điều thực sự thú vị ở đây chính là sự khác biệt giữa entropy và cross-entropy. Có thể nói nó là sự khác biệt hay *khoảng cách* giữa 2 phân bố xác suất $p(x)$ và $q(x)$. Nếu 2 phân bố xác suất này giống nhau thì khoảng cách là $0$ và ngược lại sự khác biệt càng lớn thì giá trị này càng lớn. 
 
@@ -212,7 +202,7 @@ với $H(P, Q)$ là cross-entropy; $H(P)$ là entropy của P.
 <a id="predictive-power"></a>
 ## Khả năng dự đoán
 
-![Fortune Teller](https://tonydeep.github.io/images/predict.jpg)
+![Fortune Teller](https://tonydeep.github.io/img/ce_post/predict.jpg)
 
 Ở đây chúng ta sử dụng cross-entropy để đánh giá sự khác biệt giữa 2 phân bố xác suất $y$ và $\hat{y}$ và tính lỗi (*loss*) dựa trên tổng cross entropy của toàn bộ dữ liệu training.
 
@@ -258,7 +248,7 @@ Vậy nhiệm vụ của chúng ta là điều chỉnh tham số mô hình sao c
 <a id="unified-loss"></a>
 ## Likelihood
 
-![Tape Measure](https://tonydeep.github.io/images/tape_measure.jpg)
+![Tape Measure](https://tonydeep.github.io/img/ce_post/tape_measure.jpg)
 
 Cùng phân tích cụ thể hơn về công thức tính *likelihood* trên:
 
@@ -283,7 +273,7 @@ $$ -\log L(\{y^{(n)}\}, \{\hat{y}^{(n)}\}) = \sum_n \big[-\sum_i y_i \log \hat{y
 <a id="conclusions"></a>
 ## Thảo luận
 
-![Stairs](https://tonydeep.github.io/images/stairs.jpg)
+![Stairs](https://tonydeep.github.io/img/ce_post/stairs.jpg)
 
 Khi xây dựng mô hình xác suất cho bài toán phân lớp có các lớp phân biệt lẫn nhau, chúng ta cần đánh giá sự khác biệt giữa xác suất dự đoán $\hat{y}$ và xác suất *ground-truth* $y$ và trong quá trình ***training*** chúng ta sẽ điều chỉnh tham số sao cho sự khác biệt là nhỏ nhất.
 
